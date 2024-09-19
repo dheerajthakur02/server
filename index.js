@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const corsOptions = {
   origin: 'https://user-admin-project.netlify.app',
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
