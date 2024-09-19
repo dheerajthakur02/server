@@ -9,9 +9,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'https://user-admin-project.netlify.app', 
-  methods: 'GET,POST,PUT,DELETE', 
-  credentials: true 
+    origin: 'https://user-admin-project.netlify.app', // Replace with your Netlify domain
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'] 
 }));
 app.use(express.json());
 
