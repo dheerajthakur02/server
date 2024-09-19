@@ -9,7 +9,7 @@ const app = express();
 
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: 'https://user-admin-project.netlify.app',
+  origin: '*',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
