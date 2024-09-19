@@ -31,7 +31,9 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
-
+app.get("/", (req, res) => {
+  res.json(users);
+});
 app.post("/add", async (req, res) => {
   const { name, userHandle, imageUrls } = req.body;
 
@@ -53,17 +55,14 @@ app.post("/add", async (req, res) => {
     res.status(500).send({ error: "Failed to store data" });
   }
 });
- const users;
+
 app.get("/users", async (req, res) => {
   try {
-     users = await User.find({});
+    const users = await User.find({});
     res.status(200).json(users);
   } catch (error) {
     res.status(500).send({ error: "Failed to fetch users" });
   }
-});
-app.get("/", (req, res) => {
-  res.json(users);
 });
 
 export default app;
