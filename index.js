@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 app.get("/", (req, res) => {
-  res.json(users);
+  res.send("server is working");
 });
 app.post("/add", async (req, res) => {
   const { name, userHandle, imageUrls } = req.body;
