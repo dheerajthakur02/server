@@ -20,7 +20,7 @@ app.use(express.json());
 const mongoURI = process.env.MONGODB_URI;
 // Connect to MongoDB
 mongoose.connect(mongoURI)
-  .then(() => res.render("<h1>Database connected </h1>")
+  .then(() => res.send("<h1>Database connected </h1>"))
   .catch((err) => console.log(err));
 
 // Define User Schema
