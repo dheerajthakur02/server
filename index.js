@@ -8,7 +8,11 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://user-admin-project.netlify.app', 
+  methods: 'GET,POST,PUT,DELETE', 
+  credentials: true 
+}));
 app.use(express.json());
 
 const mongoURI = process.env.MONGODB_URI;
