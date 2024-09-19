@@ -7,6 +7,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
+
 const mongoURI = process.env.MONGODB_URI;
 // Connect to MongoDB
 mongoose.connect(mongoURI)
@@ -21,11 +25,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
-
-
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.json());
 
 
 app.get("/", (req, res) => {
