@@ -8,11 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors({
-    origin: 'https://user-admin-project.netlify.app', // Replace with your Netlify domain
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'] 
-}));
+app.use(cors());
 app.use(express.json());
 
 const mongoURI = process.env.MONGODB_URI;
