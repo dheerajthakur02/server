@@ -6,9 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-app.get("/", (req, res) => {
-  res.send("<h1>Server is working</h1>");
-});
+
 app.use(bodyParser.json());
 const corsOptions = {
   origin: '*',
@@ -22,7 +20,7 @@ app.use(express.json());
 const mongoURI = process.env.MONGODB_URI;
 // Connect to MongoDB
 mongoose.connect(mongoURI)
-  .then(() => res.send("<h1>Database connected </h1>"))
+  .then(() => alert("databaseConnected")
   .catch((err) => console.log(err));
 
 // Define User Schema
@@ -35,7 +33,9 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 
-
+app.get("/", (req, res) => {
+  res.send("<h1>Server is working</h1>");
+});
 app.post("/add", async (req, res) => {
   const { name, userHandle, imageUrls } = req.body;
 
