@@ -2,26 +2,25 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
 
-dotenv.config();
 const app = express();
-
 app.use(bodyParser.json());
+
 const corsOptions = {
   origin: '*',
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI; // MongoDB Atlas URI from Vercel's environment variables
+
 // Connect to MongoDB
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Database connected"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.error("Database connection error:", err));
 
 // Define User Schema
 const userSchema = new mongoose.Schema({
@@ -31,19 +30,20 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
+
+// Routes
 app.get("/", (req, res) => {
-  res.send("server is working");
+  res.send("Server is working");
 });
+
 app.post("/add", async (req, res) => {
   const { name, userHandle, imageUrls } = req.body;
 
   try {
-
     let user = await User.findOne({ userHandle });
 
     if (user) {
-    
-      user.imageUrls = [...user.imageUrls, ...imageUrls]; 
+      user.imageUrls = [...user.imageUrls, ...imageUrls];
       await user.save();
       res.status(200).send({ message: "User updated successfully" });
     } else {
