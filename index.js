@@ -20,8 +20,12 @@ app.use(express.json());
 const mongoURI = process.env.MONGODB_URI;
 // Connect to MongoDB
 mongoose.connect(mongoURI)
-  .then(() => console.log("Mongodb Atlas Database connected successfully"))
+  .then(() => res.render("/connect")
   .catch((err) => console.log(err));
+
+app.get("/connect",(req,res)=>{
+   res.send("database connected")
+})
 
 // Define User Schema
 const userSchema = new mongoose.Schema({
